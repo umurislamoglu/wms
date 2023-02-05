@@ -15,8 +15,12 @@ import dayjs from "dayjs";
 import "dayjs/locale/tr";
 import "dayjs/locale/en";
 
+//themes
+import lightTheme from "common/themes/lightTheme";
+import darkTheme from "common/themes/darkTheme";
+
 function App() {
-  const { localeConfig } = useAppSelector((state) => state.common);
+  const { localeConfig, theme } = useAppSelector((state) => state.common);
 
   useEffect(() => {
     dayjs.locale(localeConfig.locale);
@@ -24,7 +28,10 @@ function App() {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <ConfigProvider locale={localeConfig}>
+      <ConfigProvider
+        theme={{ token: theme === "dark" ? darkTheme : lightTheme }}
+        locale={localeConfig}
+      >
         <div></div>
       </ConfigProvider>
     </I18nextProvider>
